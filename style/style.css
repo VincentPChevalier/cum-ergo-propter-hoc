@@ -92,6 +92,7 @@ button[disabled], input[disabled] {
   cursor: default; }
 
 input[type=checkbox], input[type=radio] {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0; }
 
@@ -136,7 +137,7 @@ html {
   font-size: 62.5%; }
 
 body {
-  background: url(../assets/static.gif);
+  background: url(../assets/SMPTE_Color_Bars.png);
   font-family: 'Lateef', cursive;
   font-size: 1.6rem;
   text-align: center;
@@ -153,48 +154,60 @@ body {
 h1, h2 {
   font-family: 'Raleway', sans-serif;
   font-weight: 900;
-  text-transform: uppercase;
-  margin: 2% 0; }
+  text-transform: uppercase; }
 
 h1 {
   font-size: 4rem; }
 
 h2 {
-  font-size: 2rem; }
+  font-size: 2rem;
+  margin-bottom: 40px; }
 
 p {
   font-size: 2.8rem;
   font-weight: bolder; }
+
+a {
+  color: #fff; }
+  a:hover {
+    color: magenta; }
 
 .tv {
   position: relative;
   margin-top: 0;
   border: 10px solid black;
   border-radius: 10px;
-  padding: 16% 9%;
+  padding: 80px 10px;
   color: #fff;
-  background: blue; }
-  .tv #trapezoid {
-    position: absolute;
-    bottom: -65px;
-    left: 35%;
-    border-bottom: 50px solid black;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    height: 0;
-    width: 220px; }
+  background: blue;
+  -webkit-box-shadow: 0px 0px 100px #ccc;
+  box-shadow: 0px 0px 100px #ccc; }
 
 .tv-response {
   position: relative;
   margin-top: 0;
   border: 10px solid black;
   border-radius: 10px;
-  padding: 16% 9%;
+  padding: 80px 10px;
   color: blue;
-  background: url(../assets/mother-theresa.png) no-repeat #fff;
+  background-repeat: no-repeat;
+  background-color: #fff;
   background-position: bottom right; }
+  .tv-response a {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: blue;
+    color: #fff;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.6rem; }
+  .tv-response p {
+    padding: 2%;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 3px #ccc;
+    box-shadow: 1px 1px 3px #ccc; }
 
 .fave-show {
   width: 70%;
@@ -234,16 +247,27 @@ input[type=submit]:hover, input[type=submit]:focus {
   background: white;
   color: blue; }
 
+footer {
+  position: absolute;
+  width: 100%;
+  background-color: #000;
+  bottom: 0;
+  z-index: 10; }
+  footer p {
+    padding: 10px 0;
+    margin: 0; }
+
 /* Portrait tablet and small desktops */
 @media (max-width: 940px) {
   h1 {
     font-size: 3rem; }
   h2 {
     font-size: 1.8rem; }
-  p {
+  .tv-response p {
     padding: 2%;
     background: rgba(255, 255, 255, 0.7);
     border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 3px #ccc;
     box-shadow: 1px 1px 3px #ccc; }
   .fave-show {
     width: 80%;
@@ -255,16 +279,16 @@ input[type=submit]:hover, input[type=submit]:focus {
 /* Landscape phone to portrait tablet */
 @media (max-width: 768px) {
   h1 {
+    margin-top: 20px;
     font-size: 2.8rem; }
   h2 {
-    font-size: 1.4rem; }
+    font-size: 1.4rem;
+    margin-bottom: 30px; }
   p {
     font-size: 2.4rem;
     font-weight: bolder; }
-  .tv {
-    padding: 35% 10%; }
-    .tv #trapezoid {
-      display: none; }
+  #trapezoid {
+    display: none; }
   .tv h2 {
     font-size: 1.4rem; }
   .fave-show {
@@ -282,8 +306,9 @@ input[type=submit]:hover, input[type=submit]:focus {
     font-size: 2.2rem;
     font-weight: bolder; }
   .tv {
-    margin-top: 5%;
-    padding: 38% 10%; }
+    margin-top: 40px; }
   input[type=submit] {
     font-size: 1rem;
-    letter-spacing: .1rem; } }
+    letter-spacing: .1rem; }
+  footer p {
+    font-size: 1.4rem; } }

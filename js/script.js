@@ -8,6 +8,7 @@ tvApp.apiKey = 'c53703c98c891a9440f4334af8a7c43a';
 tvApp.baseApiURL = 'https://api.themoviedb.org/3'
 tvApp.userInput = "";
 
+tvApp.saintIcon = ["./assets/mother-theresa.png", "./assets/st-augustine.png", "./assets/st-therese.png", "../assets/stbenedictblack.png", "./assets/stVeronicaGiuliani.png"];
 
 //user submits name of television show to search input
 tvApp.events = function(){
@@ -15,6 +16,11 @@ tvApp.events = function(){
 		e.preventDefault();
 		tvApp.userInput = $("#tvShowChoice").val();
 		tvApp.getTelevisionId();
+	});
+
+	$(".tv").on("click", "a", function(){
+		console.log(this);
+		location.reload();
 	});
 };
 
@@ -85,7 +91,6 @@ tvApp.getLiturgicalDate = function(airDate) {
 		dataType: 'json'
 	})
 	.then(function(saintSearch){
-			// console.log(saintSearch);
 			tvApp.collateInfo(saintSearch);
 			
 	});
@@ -96,10 +101,8 @@ tvApp.collateInfo = function(saintSearch){
 
 	//return season and weekday
 	tvApp.weekdayInfo = saintSearch.weekday;
-	// console.log(tvApp.weekdayInfo);
 
-	tvApp.seasonInfo = saintSearch.season;
-	// console.log(tvApp.seasonInfo);              
+	tvApp.seasonInfo = saintSearch.season;             
 
 	// return name of saint(s) and colour for day
 	tvApp.saintInfo = saintSearch.celebrations;
@@ -110,8 +113,6 @@ tvApp.collateInfo = function(saintSearch){
 	tvApp.saintInfo.forEach(function(saint){
 		tvApp.saintTitle = saint.title;
 		tvApp.saintColor = saint.colour;
-		// console.log(tvApp.saintTitle);
-		// console.log(tvApp.saintColor);
 	});
 
 		//responses are generated based on user's input
@@ -119,15 +120,21 @@ tvApp.collateInfo = function(saintSearch){
 		//add if statement re: Vatican II if show ended before 1969
 
 		if (tvApp.seasonInfo === "ordinary")  { 
-		collated = `<p>The final episode of ${tvApp.userInput} aired on ${tvApp.formattedAirDate}. It was an ordinary <span class="capitalize">${tvApp.weekdayInfo}</span>.</p>`;
+		collated = `<p>The final episode of ${tvApp.userInput} aired on ${tvApp.formattedAirDate}. It was an ordinary <span class="capitalize">${tvApp.weekdayInfo}</span>.</p><a href="#home">Try again!</a>`;
 		} else if  (tvApp.saintTitle === "" || tvApp.saintColours === "") {
-		collated = `<p>The final episode of ${tvApp.userInput} aired on ${tvApp.formattedAirDate}. It was a <span class="capitalize">${tvApp.weekdayInfo}</span>, during the season of <span class="capitalize">${tvApp.seasonInfo}</span>.</p>`;
+		collated = `<p>The final episode of ${tvApp.userInput} aired on ${tvApp.formattedAirDate}. It was a <span class="capitalize">${tvApp.weekdayInfo}</span>, during the season of <span class="capitalize">${tvApp.seasonInfo}</span>.</p><a href="#home">Try again!</a>`;
 		} else if (tvApp.saintTitle !== "" || tvApp.saintColours !== "")  { 
-		collated = `<p>The final episode of ${tvApp.userInput} aired on ${tvApp.formattedAirDate}. It was a <span class="capitalize">${tvApp.weekdayInfo}</span>, celebrating ${tvApp.saintTitle}, during the season of <span class="capitalize">${tvApp.seasonInfo}</span>.</p>`;
+		collated = `<p>The final episode of ${tvApp.userInput} aired on ${tvApp.formattedAirDate}. It was a <span class="capitalize">${tvApp.weekdayInfo}</span>, celebrating ${tvApp.saintTitle}, during the season of <span class="capitalize">${tvApp.seasonInfo}</span>.</p><a href="#home">Try again!</a>`;
 	  }
 	
 	  $(".fave-show").html(collated);
 	  $(".tv").addClass("tv-response");
+	  tvApp.changeResponseBG();
+};
+
+tvApp.changeResponseBG = function(){
+	let randomIcon = Math.floor(Math.random() * tvApp.saintIcon.length);
+	$(".tv-response").css("background-image", `url(${tvApp.saintIcon[randomIcon]})`)
 };
 
 $(function () {
